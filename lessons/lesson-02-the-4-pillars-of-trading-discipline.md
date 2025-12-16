@@ -4,7 +4,11 @@ lesson_number: 2
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-02/audio/lesson2-Discipline_Beats_Intelligence_Four_Pillars_Trading_DeFi.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-02/video/lesson2-DeFi_Trading_Protocol.mp4" %}
 

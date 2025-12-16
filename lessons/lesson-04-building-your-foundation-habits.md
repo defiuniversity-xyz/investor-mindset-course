@@ -4,7 +4,11 @@ lesson_number: 4
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-04/audio/lesson4-Engineer_Trading_Success_Exponentially_With_Systems.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-04/video/lesson4-Habits_of_Excellence.mp4" %}
 

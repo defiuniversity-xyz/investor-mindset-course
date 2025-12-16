@@ -4,7 +4,11 @@ lesson_number: 12
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-12/audio/lesson12-Build_Your_Elite_Trader_Mastery_System.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-12/video/lesson12-Elite_Trader_Mastery.mp4" %}
 

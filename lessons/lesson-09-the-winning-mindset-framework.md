@@ -4,7 +4,11 @@ lesson_number: 9
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-09/audio/lesson9-Building_Unshakeable_Crypto_Wealth_Mental_Fortress.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-09/video/lesson9-The_Winning_Mindset.mp4" %}
 

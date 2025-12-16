@@ -4,7 +4,11 @@ lesson_number: 8
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-08/audio/lesson8-Maximize_Peak_Cognitive_Performance_The_Flow_State_Blueprint.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-08/video/lesson8-Cognitive_Optimization.mp4" %}
 

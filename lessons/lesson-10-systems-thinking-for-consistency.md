@@ -4,7 +4,11 @@ lesson_number: 10
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-10/audio/lesson10--top_Gambling_Start_Trading_Systematically.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-10/video/lesson10-Systematic_DeFi_Trading.mp4" %}
 

@@ -4,7 +4,11 @@ lesson_number: 5
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-05/audio/lesson5-Stop_Beating_Yourself_Cognitive_Bias_in_DeFi.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-05/video/lesson5-Cognitive_Biases_in_DeFi.mp4" %}
 

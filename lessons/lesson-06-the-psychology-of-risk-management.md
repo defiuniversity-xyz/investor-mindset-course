@@ -4,7 +4,11 @@ lesson_number: 6
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-06/audio/lesson6-Survival_Position_Sizing_Psychology_Beats_Math.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-06/video/lesson6-Mastering_Your_Risk.mp4" %}
 

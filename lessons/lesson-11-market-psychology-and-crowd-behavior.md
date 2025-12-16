@@ -4,7 +4,11 @@ lesson_number: 11
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-11/audio/lesson11-Mastering_Crowd_Psychology_Six_Phases_of_Profit.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-11/video/lesson11-Contrarian_Guide_to_DeFi.mp4" %}
 

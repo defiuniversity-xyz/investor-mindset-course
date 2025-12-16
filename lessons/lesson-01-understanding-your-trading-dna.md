@@ -4,7 +4,11 @@ lesson_number: 1
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-01/audio/lesson1-Your_DeFi_Financial_DNA_Fixed_Versus_Growth.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-01/video/lesson1-Mastering_DeFi_Psychology.mp4" %}
 

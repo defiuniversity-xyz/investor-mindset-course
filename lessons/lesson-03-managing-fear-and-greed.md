@@ -4,7 +4,11 @@ lesson_number: 3
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-03/audio/lesson3-Quantifying_Fear_and_Greed_Trading_Costs.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-03/video/lesson3-Emotional_Mastery_for_Traders.mp4" %}
 

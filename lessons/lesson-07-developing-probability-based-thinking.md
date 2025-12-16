@@ -4,7 +4,11 @@ lesson_number: 7
 course: investor-mindset
 ---
 
+## 🎧 Lesson Podcast
+
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-07/audio/lesson7-Trade_DeFi_Like_a_Casino_Not_a_Gambler.m4a" %}
+
+## 🎬 Video Overview
 
 {% embed url="https://storage.googleapis.com/investor-mindset-media/lesson-07/video/lesson7-Mastering_DeFi.mp4" %}
 
