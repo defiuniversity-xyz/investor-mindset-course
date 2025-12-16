@@ -14,8 +14,6 @@ course: investor-mindset
 
 # Lesson 5: Cognitive Biases in DeFi Markets
 
-
-
 ## 🎯 Core Concept: Your Brain is Not Wired for Trading Success
 Your brain evolved to keep you alive on ancient savannas, not to make optimal decisions in volatile financial markets. Understanding and neutralizing cognitive biases is the difference between systematic success and expensive psychological mistakes.
 
@@ -122,8 +120,6 @@ Use this interactive tool to identify which cognitive biases may be affecting yo
 [![Bias Detector](images/interactives/bias-detector.png)](https://defi-university-app.web.app/interactives/investor-mindset/bias-detector.html)
 
 **[Launch Bias Detector →](https://defi-university-app.web.app/interactives/investor-mindset/bias-detector.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/bias-detector.html?course=investor-mindset&id=bias-detector-lesson5&topic=Cognitive%20Bias%20Detection" %}
 
 🔥 DeFi-Specific Bias Amplifiers
 24/7 Markets = 24/7 Bias Opportunities

@@ -14,8 +14,6 @@ course: investor-mindset
 
 # Lesson 6: The Psychology of Risk Management
 
-
-
 ## 🎯 Core Concept: Position Sizing is 80% Psychology, 20% Math
 
 ![Position Sizing Framework](https://storage.googleapis.com/investor-mindset-media/images/lesson_06/06_04_position_sizing_framework.png)
@@ -89,8 +87,6 @@ Use this interactive tool to calculate your risk across all three categories:
 [![Risk Psychology Calculator](images/interactives/risk-psychology-calculator.png)](https://defi-university-app.web.app/interactives/investor-mindset/risk-psychology-calculator.html)
 
 **[Launch Risk Psychology Calculator →](https://defi-university-app.web.app/interactives/investor-mindset/risk-psychology-calculator.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/risk-psychology-calculator.html?course=investor-mindset&id=risk-psychology-calculator-lesson6&topic=Risk%20Psychology" %}
 
 ## 📚 The Psychology of Drawdowns
 

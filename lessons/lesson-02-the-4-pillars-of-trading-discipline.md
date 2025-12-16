@@ -14,12 +14,8 @@ course: investor-mindset
 
 # Lesson 2: The 4 Pillars of Trading Discipline
 
-
-
 ## 🎯 Core Concept: Discipline Beats Intelligence Every Time
 Smart people lose money in DeFi every day. Disciplined people build wealth consistently. The difference isn't IQ — it's following a systematic approach that removes emotions from decision-making.
-
-
 
 ## 📚 The Four Pillars Framework
 
@@ -163,8 +159,6 @@ Use this interactive checklist to track your discipline across all four pillars:
 [![Discipline Checklist](images/interactives/discipline-checklist.png)](https://defi-university-app.web.app/interactives/investor-mindset/discipline-checklist.html)
 
 **[Launch Discipline Checklist →](https://defi-university-app.web.app/interactives/investor-mindset/discipline-checklist.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/discipline-checklist.html?course=investor-mindset&id=discipline-checklist-lesson2&topic=Four%20Pillars%20Discipline" %}
 
 ## 🔑 Key Takeaways
 

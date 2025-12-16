@@ -29,8 +29,6 @@ Test your understanding of the core concepts from Module 3, covering winning min
 
 **[Take Module 3 Quiz →](https://defi-university-app.web.app/quizzes/investor-mindset/module-03-quiz.html)**
 
-{% embed url="https://defi-university-app.web.app/templates/quiz-template.html?course=investor-mindset&module=module-03" %}
-
 ---
 
 ## After the Quiz

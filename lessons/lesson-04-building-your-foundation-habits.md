@@ -14,8 +14,6 @@ course: investor-mindset
 
 # Lesson 4: Building Your Foundation Habits
 
-
-
 ## 🎯 Core Concept: Excellence is a Habit, Not an Act
 Small daily habits compound into extraordinary results. The difference between profitable and unprofitable DeFi traders isn't dramatic — it's the 1% daily improvements in research, decision-making, and emotional control that create massive long-term advantages.
 
@@ -161,8 +159,6 @@ Use this interactive tool to track your foundation habits daily:
 [![Habit Tracker](images/interactives/habit-tracker.png)](https://defi-university-app.web.app/interactives/investor-mindset/habit-tracker.html)
 
 **[Launch Habit Tracker →](https://defi-university-app.web.app/interactives/investor-mindset/habit-tracker.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/habit-tracker.html?course=investor-mindset&id=habit-tracker-lesson4&topic=Foundation%20Habits" %}
 
 ## 🔑 Key Takeaways
 

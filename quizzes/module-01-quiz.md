@@ -29,8 +29,6 @@ Test your understanding of the core concepts from Module 1, covering the evoluti
 
 **[Take Module 1 Quiz →](https://defi-university-app.web.app/quizzes/investor-mindset/module-01-quiz.html)**
 
-{% embed url="https://defi-university-app.web.app/templates/quiz-template.html?course=investor-mindset&module=module-01" %}
-
 ---
 
 ## After the Quiz

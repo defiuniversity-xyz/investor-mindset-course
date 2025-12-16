@@ -29,8 +29,6 @@ Test your understanding of the core concepts from Module 2, covering cognitive b
 
 **[Take Module 2 Quiz →](https://defi-university-app.web.app/quizzes/investor-mindset/module-02-quiz.html)**
 
-{% embed url="https://defi-university-app.web.app/templates/quiz-template.html?course=investor-mindset&module=module-02" %}
-
 ---
 
 ## After the Quiz

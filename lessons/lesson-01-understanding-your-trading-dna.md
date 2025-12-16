@@ -14,8 +14,6 @@ course: investor-mindset
 
 # Lesson 1: Understanding Your Trading DNA
 
-
-
 ## 🎯 Core Concept: Know Thyself Before You Trade
 Your trading psychology is like your financial DNA — unique patterns that determine how you react under pressure, process information, and make decisions. Most DeFi traders lose money not because they lack intelligence, but because they don't understand their psychological wiring.
 
@@ -70,8 +68,6 @@ Complete the interactive Trading DNA Assessment below to discover your trading p
 [![Trading DNA Assessment](images/interactives/trading-dna-assessment.png)](https://defi-university-app.web.app/interactives/investor-mindset/trading-dna-assessment.html)
 
 **[Launch Trading DNA Assessment →](https://defi-university-app.web.app/interactives/investor-mindset/trading-dna-assessment.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/trading-dna-assessment.html?course=investor-mindset&id=trading-dna-assessment-lesson1&topic=Trading%20DNA%20Assessment" %}
 
 ![Self-Assessment Scoring Chart](https://storage.googleapis.com/investor-mindset-media/images/lesson_01/01_03_self-assessment_scoring_chart.png)
 

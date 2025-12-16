@@ -14,8 +14,6 @@ course: investor-mindset
 
 # Lesson 3: Managing Fear and Greed
 
-
-
 ## 🎯 Core Concept: Master Your Emotions or They'll Master You
 Fear and greed are the two forces that separate money from DeFi traders faster than any exploit or rug pull. They make you sell bottoms and buy tops with mathematical precision. Learning to recognize and neutralize these emotions is the difference between trading and gambling.
 
@@ -157,8 +155,6 @@ Use this interactive tool to track your emotional state before making trading de
 [![Emotional State Tracker](images/interactives/emotional-state-tracker.png)](https://defi-university-app.web.app/interactives/investor-mindset/emotional-state-tracker.html)
 
 **[Launch Emotional State Tracker →](https://defi-university-app.web.app/interactives/investor-mindset/emotional-state-tracker.html)**
-
-{% embed url="https://defi-university-app.web.app/interactives/investor-mindset/emotional-state-tracker.html?course=investor-mindset&id=emotional-state-tracker-lesson3&topic=Emotional%20State%20Tracking" %}
 
 ## 📚 Emergency Emotional Regulation Toolkit
 
