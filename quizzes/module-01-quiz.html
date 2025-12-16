@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Foundation Building Quiz - DeFi University</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .quiz-container { max-width: 800px; margin: 0 auto; }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .quiz-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .quiz-header p { color: #888; font-size: 16px; }
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a3e635, #65a30d);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .question-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .question-number { font-size: 14px; color: #a3e635; margin-bottom: 10px; }
+        .question-text { font-size: 18px; margin-bottom: 20px; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover { border-color: rgba(163, 230, 53, 0.5); background: rgba(163, 230, 53, 0.05); }
+        .option.selected { border-color: #a3e635; background: rgba(163, 230, 53, 0.1); }
+        .option.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.15); }
+        .option.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.15); }
+        .explanation {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(163, 230, 53, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #a3e635;
+            display: none;
+        }
+        .explanation.show { display: block; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        .btn-primary { background: linear-gradient(135deg, #a3e635, #65a30d); color: #000; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(163, 230, 53, 0.3); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+        .results-container { text-align: center; padding: 40px; }
+        .score-display {
+            font-size: 72px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .score-label { font-size: 20px; color: #888; margin-bottom: 30px; }
+        .points-earned {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(163, 230, 53, 0.15), rgba(163, 230, 53, 0.05));
+            border: 1px solid rgba(163, 230, 53, 0.3);
+            border-radius: 16px;
+        }
+        .points-value { font-size: 36px; font-weight: 700; color: #a3e635; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px 0; }
+        .stat-box { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 14px; color: #888; }
+        .login-prompt {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .login-prompt h2 { margin-bottom: 15px; }
+        .login-prompt p { color: #888; margin-bottom: 20px; }
+        .hidden { display: none !important; }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .quiz-header h1 { font-size: 22px; }
+            .question-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Module 1: Foundation Building Quiz</h1>
+            <p>Trading psychology DNA, discipline pillars, fear/greed management, and foundation habits</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+            </div>
+            <div id="progress-text">Question 1 of 12</div>
+        </div>
+        <div id="login-prompt" class="login-prompt hidden">
+            <h2>Sign In to Track Progress</h2>
+            <p>Sign in to DeFi University to earn points and track your quiz progress.</p>
+            <a href="https://www.defiuniversity.xyz/login" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Sign In</a>
+            <button class="btn btn-secondary" style="margin-top: 10px;" onclick="startQuizWithoutAuth()">Continue Without Signing In</button>
+        </div>
+        <div id="quiz-content"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuGdDF6jYPcZbQTpbGZPwnl3Qynr-LMWc",
+            authDomain: "defi-university-prod.firebaseapp.com",
+            projectId: "defi-university-prod",
+            storageBucket: "defi-university-prod.firebasestorage.app",
+            messagingSenderId: "309871336262",
+            appId: "1:309871336262:web:d2dc4be5729ac1d5a6a347"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        let userToken = null;
+        let isAuthenticated = false;
+        let currentQuestion = 0;
+        let answers = [];
+        let quizData = null;
+        let moduleData = null;
+        
+        const courseId = 'investor-mindset';
+        const moduleId = 'module-01';
+        const apiBaseUrl = 'https://api.defiuniversity.xyz/api';
+
+        async function loadQuizData() {
+            try {
+                const response = await fetch('investor-mindset.json');
+                quizData = await response.json();
+                moduleData = quizData.modules.find(m => m.moduleId === moduleId);
+            } catch (error) {
+                console.error('Error loading quiz data:', error);
+                document.getElementById('quiz-content').innerHTML = '<p>Error loading quiz. Please try again.</p>';
+            }
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userToken = await user.getIdToken();
+                isAuthenticated = true;
+                await loadQuizData();
+                renderQuestion();
+            } else {
+                await loadQuizData();
+                document.getElementById('login-prompt').classList.remove('hidden');
+            }
+        });
+
+        window.startQuizWithoutAuth = function() {
+            document.getElementById('login-prompt').classList.add('hidden');
+            renderQuestion();
+        };
+
+        function renderQuestion() {
+            if (!moduleData) return;
+            const questions = moduleData.questions;
+            if (currentQuestion >= questions.length) { showResults(); return; }
+
+            const q = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+
+            const optionsHtml = q.options.map(opt => `
+                <div class="option" data-id="${opt.id}" onclick="selectOption('${opt.id}')">
+                    <strong>${opt.id.toUpperCase()}.</strong> ${opt.text}
+                </div>
+            `).join('');
+
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">Question ${currentQuestion + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" id="options">${optionsHtml}</div>
+                    <div class="explanation" id="explanation"><strong>Explanation:</strong> ${q.explanation}</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>← Previous</button>
+                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>
+                        ${currentQuestion === questions.length - 1 ? 'View Results' : 'Next →'}
+                    </button>
+                </div>
+            `;
+
+            if (answers[currentQuestion]) {
+                const option = document.querySelector(`[data-id="${answers[currentQuestion]}"]`);
+                if (option) { option.classList.add('selected'); showFeedback(answers[currentQuestion]); }
+            }
+        }
+
+        window.selectOption = function(optionId) {
+            const q = moduleData.questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => { opt.classList.remove('selected', 'correct', 'incorrect'); opt.style.pointerEvents = 'none'; });
+
+            const selectedOption = document.querySelector(`[data-id="${optionId}"]`);
+            const correctOption = document.querySelector(`[data-id="${q.correctAnswer}"]`);
+            
+            if (optionId === q.correctAnswer) { selectedOption.classList.add('correct'); }
+            else { selectedOption.classList.add('incorrect'); correctOption.classList.add('correct'); }
+
+            answers[currentQuestion] = optionId;
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('next-btn').disabled = false;
+        };
+
+        function showFeedback(optionId) {
+            const q = moduleData.questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+
+            const selectedOption = document.querySelector(`[data-id="${optionId}"]`);
+            const correctOption = document.querySelector(`[data-id="${q.correctAnswer}"]`);
+            
+            if (optionId === q.correctAnswer) { selectedOption.classList.add('correct'); }
+            else { selectedOption.classList.add('incorrect'); correctOption.classList.add('correct'); }
+
+            document.getElementById('explanation').classList.add('show');
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        window.nextQuestion = function() { currentQuestion++; renderQuestion(); };
+        window.prevQuestion = function() { if (currentQuestion > 0) { currentQuestion--; renderQuestion(); } };
+
+        async function showResults() {
+            const questions = moduleData.questions;
+            let correct = 0;
+            questions.forEach((q, i) => { if (answers[i] === q.correctAnswer) correct++; });
+
+            const score = Math.round((correct / questions.length) * 100);
+            const passed = score >= moduleData.passingScore;
+            let pointsAwarded = 0;
+
+            if (isAuthenticated && userToken) {
+                try {
+                    const response = await fetch(`${apiBaseUrl}/progress/quiz`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userToken}` },
+                        body: JSON.stringify({ courseId: courseId, quizId: moduleId, score: score })
+                    });
+                    if (response.ok) { const data = await response.json(); pointsAwarded = data.pointsAwarded || 0; }
+                } catch (error) { console.error('Error submitting quiz:', error); }
+            }
+
+            let pointsHtml = '';
+            if (pointsAwarded > 0) {
+                pointsHtml = `<div class="points-earned"><div style="font-size: 14px; color: #a3e635; margin-bottom: 8px;">🏆 Points Earned</div><div class="points-value">+${pointsAwarded} pts</div>${score === 100 ? '<div style="font-size: 12px; color: #888; margin-top: 4px;">Includes perfect score bonus!</div>' : ''}</div>`;
+            } else if (isAuthenticated) {
+                pointsHtml = `<div class="points-earned" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);"><div style="font-size: 14px; color: #888;">Quiz previously completed</div></div>`;
+            }
+
+            document.getElementById('quiz-content').innerHTML = `
+                <div class="question-card results-container">
+                    <div class="score-display">${score}%</div>
+                    <div class="score-label">${passed ? '🎉 Congratulations! You passed!' : '📚 Keep studying!'}</div>
+                    ${pointsHtml}
+                    <div class="stats-grid">
+                        <div class="stat-box"><div class="stat-value">${correct}</div><div class="stat-label">Correct</div></div>
+                        <div class="stat-box"><div class="stat-value">${questions.length - correct}</div><div class="stat-label">Incorrect</div></div>
+                        <div class="stat-box"><div class="stat-value">${questions.length}</div><div class="stat-label">Total</div></div>
+                    </div>
+                    <p style="color: #888; margin-bottom: 20px;">${passed ? 'Great job! You have a solid understanding of trading psychology foundations.' : `You need ${moduleData.passingScore}% to pass. Review the material and try again.`}</p>
+                    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="location.reload()">Retake Quiz</button>
+                        <a href="https://www.defiuniversity.xyz/courses" class="btn btn-primary" style="text-decoration: none;">View Account Hub →</a>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

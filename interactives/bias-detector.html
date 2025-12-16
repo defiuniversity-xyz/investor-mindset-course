@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Bias Detector - DeFi University</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .header p { color: #888; font-size: 14px; }
+        #points-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        #points-badge.show { opacity: 1; transform: translateY(0); }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+        .bias-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .bias-item:hover { background: rgba(255,255,255,0.05); }
+        .bias-item.detected { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .bias-item.detected .checkbox { background: #ef4444; border-color: #ef4444; }
+        .bias-content { flex: 1; }
+        .bias-name { font-weight: 600; margin-bottom: 5px; color: #ef4444; }
+        .bias-desc { font-size: 13px; color: #888; line-height: 1.5; }
+        .risk-score {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        .score-low { color: #22c55e; }
+        .score-medium { color: #eab308; }
+        .score-high { color: #ef4444; }
+        .recommendation {
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+        .rec-safe { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .rec-caution { background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); }
+        .rec-danger { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .rec-title { font-weight: 600; margin-bottom: 10px; }
+        .rec-text { font-size: 14px; color: #ccc; line-height: 1.6; }
+        .btn-reset {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .btn-reset:hover { background: rgba(255,255,255,0.15); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div id="points-badge">+15 pts earned!</div>
+            <h1>🔍 Cognitive Bias Detector</h1>
+            <p>Pre-trade bias detection checklist</p>
+        </div>
+        <div class="card">
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">Confirmation Bias</div>
+                    <div class="bias-desc">Am I seeking information that confirms what I want to believe?</div>
+                </div>
+            </div>
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">FOMO (Fear of Missing Out)</div>
+                    <div class="bias-desc">Is this decision driven by recent price movements or social media?</div>
+                </div>
+            </div>
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">Loss Aversion</div>
+                    <div class="bias-desc">Am I holding losing positions hoping for recovery?</div>
+                </div>
+            </div>
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">Anchoring Bias</div>
+                    <div class="bias-desc">Am I fixating on all-time highs or purchase prices instead of current reality?</div>
+                </div>
+            </div>
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">Herd Mentality</div>
+                    <div class="bias-desc">Am I following crypto Twitter consensus without independent analysis?</div>
+                </div>
+            </div>
+            <div class="bias-item" onclick="toggleBias(this)">
+                <div class="checkbox"></div>
+                <div class="bias-content">
+                    <div class="bias-name">Overconfidence</div>
+                    <div class="bias-desc">Am I risking more than my predetermined position size limits?</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="risk-score" id="risk-score">-</div>
+            <div style="text-align: center; color: #888; margin-bottom: 20px;" id="risk-label">Check any biases that apply to your current decision</div>
+        </div>
+        <div class="recommendation" id="recommendation">
+            <div class="rec-title" id="rec-title">-</div>
+            <div class="rec-text" id="rec-text">-</div>
+        </div>
+        <button class="btn-reset" onclick="resetBias()">Reset Checklist</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuGdDF6jYPcZbQTpbGZPwnl3Qynr-LMWc",
+            authDomain: "defi-university-prod.firebaseapp.com",
+            projectId: "defi-university-prod",
+            storageBucket: "defi-university-prod.firebasestorage.app",
+            messagingSenderId: "309871336262",
+            appId: "1:309871336262:web:d2dc4be5729ac1d5a6a347"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let userToken = null;
+        let tracked = false;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) userToken = await user.getIdToken();
+        });
+
+        window.toggleBias = async function(el) {
+            el.classList.toggle('detected');
+            updateScore();
+
+            if (!tracked && userToken) {
+                const detectedCount = document.querySelectorAll('.bias-item.detected').length;
+                if (detectedCount > 0) {
+                    tracked = true;
+                    try {
+                        const response = await fetch('https://api.defiuniversity.xyz/api/progress/interaction', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userToken}` },
+                            body: JSON.stringify({ courseId: 'investor-mindset', interactionId: 'bias-detector', type: 'checklist' })
+                        });
+                        if (response.ok) {
+                            const badge = document.getElementById('points-badge');
+                            badge.classList.add('show');
+                            setTimeout(() => badge.classList.remove('show'), 2500);
+                        }
+                    } catch (e) { console.error('Tracking error:', e); }
+                }
+            }
+        };
+
+        function updateScore() {
+            const detected = document.querySelectorAll('.bias-item.detected').length;
+            const total = document.querySelectorAll('.bias-item').length;
+            const scoreEl = document.getElementById('risk-score');
+            const labelEl = document.getElementById('risk-label');
+            const recEl = document.getElementById('recommendation');
+            const recTitle = document.getElementById('rec-title');
+            const recText = document.getElementById('rec-text');
+
+            if (detected === 0) {
+                scoreEl.textContent = 'CLEAR';
+                scoreEl.className = 'risk-score score-low';
+                labelEl.textContent = 'No biases detected';
+                recEl.className = 'recommendation rec-safe';
+                recEl.style.display = 'block';
+                recTitle.textContent = '✅ Clear Mind';
+                recText.textContent = 'You\'re thinking clearly without major cognitive biases affecting your decision. Proceed with your trading plan, but remember to maintain this objectivity throughout.';
+            } else if (detected <= 2) {
+                scoreEl.textContent = 'CAUTION';
+                scoreEl.className = 'risk-score score-medium';
+                labelEl.textContent = `${detected} bias(es) detected`;
+                recEl.className = 'recommendation rec-caution';
+                recEl.style.display = 'block';
+                recTitle.textContent = '⚠️ Bias Alert';
+                recText.textContent = 'You\'ve identified some cognitive biases affecting your decision. Take a 24-hour cooling period, apply the bias-breaking protocols from Lesson 5, and reassess with a clear mind.';
+            } else {
+                scoreEl.textContent = 'HIGH RISK';
+                scoreEl.className = 'risk-score score-high';
+                labelEl.textContent = `${detected} biases detected`;
+                recEl.className = 'recommendation rec-danger';
+                recEl.style.display = 'block';
+                recTitle.textContent = '🚨 Do Not Trade';
+                recText.textContent = 'Multiple cognitive biases are affecting your judgment. This is NOT the time to make trading decisions. Wait 48 hours, review Lesson 5 on cognitive biases, and use the bias-breaking protocols before reconsidering.';
+            }
+        }
+
+        window.resetBias = function() {
+            document.querySelectorAll('.bias-item').forEach(item => {
+                item.classList.remove('detected');
+            });
+            updateScore();
+        };
+
+        updateScore();
+    </script>
+</body>
+</html>

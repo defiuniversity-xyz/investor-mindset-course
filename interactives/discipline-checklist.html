@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Discipline Checklist - DeFi University</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .header p { color: #888; font-size: 14px; }
+        #points-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        #points-badge.show { opacity: 1; transform: translateY(0); }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title span { font-size: 20px; }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .checklist-item:hover { background: rgba(255,255,255,0.05); }
+        .checklist-item.checked { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .checklist-item.checked .checkbox { background: #22c55e; border-color: #22c55e; }
+        .item-content { flex: 1; }
+        .item-title { font-weight: 500; margin-bottom: 5px; }
+        .item-desc { font-size: 13px; color: #888; line-height: 1.5; }
+        .progress-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .progress-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a3e635, #65a30d);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+        .score-display {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+            color: #a3e635;
+        }
+        .btn-reset {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .btn-reset:hover { background: rgba(255,255,255,0.15); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div id="points-badge">+20 pts earned!</div>
+            <h1>💎 Four Pillars of Trading Discipline</h1>
+            <p>Complete this checklist before making any trading decision</p>
+        </div>
+        <div class="progress-section">
+            <div style="font-size: 14px; color: #888; margin-bottom: 10px;">Completion: <span id="completion">0%</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="score-display" id="score-display">0/16</div>
+        </div>
+        <div class="card">
+            <div class="card-title"><span>📊</span> Pillar 1: Mechanical Market Analysis</div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Protocol Scorecard completed (70+ score)</div>
+                    <div class="item-desc">Rate protocol on team, innovation, TVL growth, community, audits, tokenomics, moat, compliance, revenue, viability</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">TVL Growth Analysis reviewed (30/60/90-day trends)</div>
+                    <div class="item-desc">Objectively track protocol growth trends without emotional bias</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Risk Assessment Checklist completed</div>
+                    <div class="item-desc">Comprehensive evaluation of protocol and position risks</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Team Assessment using standardized evaluation</div>
+                    <div class="item-desc">Check backgrounds, track records, and credibility</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title"><span>🎲</span> Pillar 2: Probability-Based Thinking</div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Conviction level assessed (60%+ for 5% position)</div>
+                    <div class="item-desc">Use 60/40 position sizing rule based on conviction</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Probability Assessment Matrix completed</div>
+                    <div class="item-desc">Consider historical data, market cycle, regulatory outcomes, adoption curve</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Expected Value calculated</div>
+                    <div class="item-desc">EV = (Probability × Win) - (Probability × Loss)</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title"><span>✅</span> Pillar 3: Objective Decision Criteria</div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Entry Criteria Checklist completed</div>
+                    <div class="item-desc">Protocol scores 70+, position size fits rules, market conditions align, exit strategy defined</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Exit Criteria Checklist completed</div>
+                    <div class="item-desc">Stop-loss levels set, profit targets defined, thesis break conditions identified</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Portfolio allocation limits respected</div>
+                    <div class="item-desc">Max 5% per protocol, max 20% in experimental DeFi, 20% cash reserve</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title"><span>🔄</span> Pillar 4: Consistent Execution</div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Emotional State Tracker completed</div>
+                    <div class="item-desc">Fear + Greed + Stress ≤ 15 before proceeding</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Cognitive Bias Detector completed</div>
+                    <div class="item-desc">No major biases detected affecting decision</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Trading Constitution reviewed</div>
+                    <div class="item-desc">Decision aligns with your personal trading rules</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">24-hour cooling period observed (if major decision)</div>
+                    <div class="item-desc">For significant positions, wait 24 hours after initial decision</div>
+                </div>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <div class="item-content">
+                    <div class="item-title">Decision documented in trading journal</div>
+                    <div class="item-desc">Record reasoning, conviction level, and expected outcomes</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-reset" onclick="resetChecklist()">Reset Checklist</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuGdDF6jYPcZbQTpbGZPwnl3Qynr-LMWc",
+            authDomain: "defi-university-prod.firebaseapp.com",
+            projectId: "defi-university-prod",
+            storageBucket: "defi-university-prod.firebasestorage.app",
+            messagingSenderId: "309871336262",
+            appId: "1:309871336262:web:d2dc4be5729ac1d5a6a347"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let userToken = null;
+        let tracked = false;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) userToken = await user.getIdToken();
+        });
+
+        window.toggleCheck = async function(el) {
+            el.classList.toggle('checked');
+            updateScore();
+
+            if (!tracked && userToken) {
+                const checkedCount = document.querySelectorAll('.checklist-item.checked').length;
+                if (checkedCount >= 10) {
+                    tracked = true;
+                    try {
+                        const response = await fetch('https://api.defiuniversity.xyz/api/progress/interaction', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userToken}` },
+                            body: JSON.stringify({ courseId: 'investor-mindset', interactionId: 'discipline-checklist', type: 'checklist' })
+                        });
+                        if (response.ok) {
+                            const badge = document.getElementById('points-badge');
+                            badge.classList.add('show');
+                            setTimeout(() => badge.classList.remove('show'), 2500);
+                        }
+                    } catch (e) { console.error('Tracking error:', e); }
+                }
+            }
+        };
+
+        function updateScore() {
+            const items = document.querySelectorAll('.checklist-item');
+            const checked = document.querySelectorAll('.checklist-item.checked').length;
+            const total = items.length;
+            const completion = (checked / total) * 100;
+
+            document.getElementById('completion').textContent = `${Math.round(completion)}%`;
+            document.getElementById('progress-fill').style.width = `${completion}%`;
+            document.getElementById('score-display').textContent = `${checked}/${total}`;
+        }
+
+        window.resetChecklist = function() {
+            document.querySelectorAll('.checklist-item').forEach(item => {
+                item.classList.remove('checked');
+            });
+            updateScore();
+        };
+
+        updateScore();
+    </script>
+</body>
+</html>

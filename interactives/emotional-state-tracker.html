@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional State Tracker - DeFi University</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .header p { color: #888; font-size: 14px; }
+        #points-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #a3e635, #65a30d);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        #points-badge.show { opacity: 1; transform: translateY(0); }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        .emotion-group {
+            margin-bottom: 25px;
+        }
+        .emotion-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .emotion-value {
+            color: #a3e635;
+            font-weight: 600;
+        }
+        .slider-container {
+            position: relative;
+        }
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #a3e635;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #a3e635;
+            cursor: pointer;
+            border: none;
+        }
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .dashboard {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .total-score {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        .score-safe { color: #22c55e; }
+        .score-warning { color: #eab308; }
+        .score-danger { color: #ef4444; }
+        .trading-rule {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .rule-safe {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+        .rule-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        .btn-reset {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .btn-reset:hover { background: rgba(255,255,255,0.15); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div id="points-badge">+10 pts earned!</div>
+            <h1>🧠 Emotional State Tracker</h1>
+            <p>Rate your emotional state before making trading decisions</p>
+        </div>
+        <div class="card">
+            <div class="emotion-group">
+                <div class="emotion-label">
+                    <span>😨 Fear Level</span>
+                    <span class="emotion-value" id="fear-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="fear-slider" oninput="updateEmotion('fear', this.value)">
+                    <div class="slider-labels">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+            <div class="emotion-group">
+                <div class="emotion-label">
+                    <span>🤑 Greed Level</span>
+                    <span class="emotion-value" id="greed-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="greed-slider" oninput="updateEmotion('greed', this.value)">
+                    <div class="slider-labels">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+            <div class="emotion-group">
+                <div class="emotion-label">
+                    <span>💪 Confidence Level</span>
+                    <span class="emotion-value" id="confidence-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="confidence-slider" oninput="updateEmotion('confidence', this.value)">
+                    <div class="slider-labels">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+            <div class="emotion-group">
+                <div class="emotion-label">
+                    <span>😰 Stress Level</span>
+                    <span class="emotion-value" id="stress-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="stress-slider" oninput="updateEmotion('stress', this.value)">
+                    <div class="slider-labels">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard">
+            <div class="total-score" id="total-score">-</div>
+            <div class="trading-rule" id="trading-rule">Adjust sliders to see your trading recommendation</div>
+        </div>
+        <button class="btn-reset" onclick="resetEmotions()">Reset All</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuGdDF6jYPcZbQTpbGZPwnl3Qynr-LMWc",
+            authDomain: "defi-university-prod.firebaseapp.com",
+            projectId: "defi-university-prod",
+            storageBucket: "defi-university-prod.firebasestorage.app",
+            messagingSenderId: "309871336262",
+            appId: "1:309871336262:web:d2dc4be5729ac1d5a6a347"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let userToken = null;
+        let tracked = false;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) userToken = await user.getIdToken();
+        });
+
+        window.updateEmotion = async function(emotion, value) {
+            document.getElementById(`${emotion}-value`).textContent = value;
+            updateDashboard();
+
+            if (!tracked && userToken) {
+                const fear = parseInt(document.getElementById('fear-slider').value);
+                const greed = parseInt(document.getElementById('greed-slider').value);
+                const stress = parseInt(document.getElementById('stress-slider').value);
+                const total = fear + greed + stress;
+                
+                if (total > 0) {
+                    tracked = true;
+                    try {
+                        const response = await fetch('https://api.defiuniversity.xyz/api/progress/interaction', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userToken}` },
+                            body: JSON.stringify({ courseId: 'investor-mindset', interactionId: 'emotional-state-tracker', type: 'tracker' })
+                        });
+                        if (response.ok) {
+                            const badge = document.getElementById('points-badge');
+                            badge.classList.add('show');
+                            setTimeout(() => badge.classList.remove('show'), 2500);
+                        }
+                    } catch (e) { console.error('Tracking error:', e); }
+                }
+            }
+        };
+
+        function updateDashboard() {
+            const fear = parseInt(document.getElementById('fear-slider').value);
+            const greed = parseInt(document.getElementById('greed-slider').value);
+            const stress = parseInt(document.getElementById('stress-slider').value);
+            const total = fear + greed + stress;
+
+            const scoreEl = document.getElementById('total-score');
+            const ruleEl = document.getElementById('trading-rule');
+
+            scoreEl.textContent = total;
+
+            if (total > 15) {
+                scoreEl.className = 'total-score score-danger';
+                ruleEl.className = 'trading-rule rule-danger';
+                ruleEl.textContent = '🚨 NO TRADING DECISIONS - Emotional levels too high (Fear + Greed + Stress > 15). Take a break and reassess later.';
+            } else if (total > 10) {
+                scoreEl.className = 'total-score score-warning';
+                ruleEl.className = 'trading-rule rule-danger';
+                ruleEl.textContent = '⚠️ CAUTION - High emotional levels (10-15). Consider waiting or reducing position sizes significantly.';
+            } else {
+                scoreEl.className = 'total-score score-safe';
+                ruleEl.className = 'trading-rule rule-safe';
+                ruleEl.textContent = '✅ SAFE TO TRADE - Emotional levels are manageable. Proceed with your trading plan.';
+            }
+        }
+
+        window.resetEmotions = function() {
+            document.getElementById('fear-slider').value = 5;
+            document.getElementById('greed-slider').value = 5;
+            document.getElementById('confidence-slider').value = 5;
+            document.getElementById('stress-slider').value = 5;
+            updateEmotion('fear', 5);
+            updateEmotion('greed', 5);
+            updateEmotion('confidence', 5);
+            updateEmotion('stress', 5);
+        };
+
+        updateDashboard();
+    </script>
+</body>
+</html>
